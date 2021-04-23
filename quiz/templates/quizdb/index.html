@@ -1,0 +1,41 @@
+{%extends 'layout.html'%}
+{%load static%}
+
+{%block content%}
+<div class="row">
+  <div class="col-sm-12">
+    {%if categories %}
+      {%for category in categories%}
+        <div class="card mb-3">
+          <div class="row">
+          <div class="col-md-3">
+              <img src="{%static category.get_img_path%}" alt="" class="card-img">
+          </div>
+          <div class="col-md-9">
+              <div class="card-body">
+                  <div class="card-text">
+                      <a href=
+                        {%if user.is_authenticated%}
+                          "{%url 'quiz' category.name%}"
+                        {%else%}
+                          "{%url 'login'%}"
+                        {%endif%}
+                        class="text-primary">{{category.name}}</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+        </div>
+      {%endfor%}
+    {%else%}
+      <div class="alert alert-warning">
+        <p>No quizes</p>
+      </div>
+    {%endif%}
+
+
+  </div>
+</div>
+
+    
+{%endblock%}

@@ -1,0 +1,44 @@
+{%extends 'layout.html'%}
+{%load static%}
+
+{%block content%}
+    <div class="card-mb-3">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{%static category.get_img_path%}" alt="" class="card-img">
+            </div>
+            <div class="col-md-9">
+                <h1>{{category.name}}</h1>
+                <hr>
+                <div class="container">
+                    {%if category.questions%}
+                        {%for question in category.questions%}
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    {{question.question_text|linebreaks}}
+                                </div>
+                            </div>
+                                                          
+                                {%for option in question.options%}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input id = "{{option.id}}" name = "{{question.id}}" type="radio" class="custom-control-input">
+                                        <label for="{{option.id}}" class="custom-control-label">{{option.text|linebreaks}}</label>
+                                    </div>
+                                    {%endfor%}
+                            
+                            <hr>
+                        {%endfor%}
+                    {%else%}
+                            <h2 class = "text-warning">Sorry, category is empty</h2>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 text-center">
+                <button type="submit" class = "btn btn-success text-center">Submit</button>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
