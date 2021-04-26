@@ -23,5 +23,6 @@ urlpatterns = [
     path('quizdb/', include('quizdb.urls')), #http://127.0.0.1:8000/quizdb
     path('', include('quizapp.urls')), #http://127.0.0.1:8000
     path('user/', include('user.urls')), #http://127.0.0.1:8000/user
+    path('score', include('score.urls'))
 
 ]

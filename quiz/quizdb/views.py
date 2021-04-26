@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 from .models import Category
 
@@ -12,9 +12,10 @@ def index(request):
 
 def quiz(request, category_name):
     try:
-        category = Category.objects.filter(name = category_name)
-        context = {'category' : category[0]}
+        category = Category.objects.filter(name = category_name).first()
+        context = {'category' : category}
         return render(request, 'quizdb/quiz.html', context)
     except Category.DoesNotExist:
         raise Http404("No category")
-    
+
+
